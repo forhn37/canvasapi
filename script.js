@@ -1,24 +1,36 @@
 // 기존 script.js 내용 아래에 이어서 추가
 const canvas = document.getElementById('myCanvas');
-console.log(canvas)
 if (canvas.getContext) {
     const ctx = canvas.getContext('2d');
 
-    // 1. 채워진 사각형 그리기 (fillRect)
-    ctx.fillStyle = 'red'; // 채울 색상 설정
-    ctx.fillRect(50, 50, 100, 75); // (x, y, 가로, 세로)
+    // --- 사각형 예제 코드 위에 있다면 주석 처리하거나 제거하여 혼동 방지 ---
 
-    // 2. 윤곽선 사각형 그리기 (strokeRect)
-    ctx.strokeStyle = 'blue'; // 윤곽선 색상 설정
-    ctx.lineWidth = 5; // 윤곽선 두께 설정
-    ctx.strokeRect(200, 50, 100, 75);
+    // 1. 선 그리기
+    ctx.beginPath(); // 새로운 경로 시작
+    ctx.moveTo(50, 150); // 시작점 (x, y)
+    ctx.lineTo(150, 250); // 끝점 (x, y)
+    ctx.strokeStyle = 'purple';
+    ctx.lineWidth = 3;
+    ctx.stroke(); // 선 그리기
 
-    // 3. 다른 채워진 사각형 그리기
-    ctx.fillStyle = 'green';
-    ctx.fillRect(350, 50, 100, 75);
+    // 2. 삼각형 그리기 (경로를 닫아서 채우기)
+    ctx.beginPath();
+    ctx.moveTo(200, 250); // 첫 번째 꼭짓점
+    ctx.lineTo(250, 150); // 두 번째 꼭짓점
+    ctx.lineTo(300, 250); // 세 번째 꼭짓점
+    ctx.closePath(); // 시작점으로 돌아가 경로를 닫음
+    ctx.fillStyle = 'orange';
+    ctx.fill(); // 도형 채우기
+    ctx.strokeStyle = 'darkorange'; // 윤곽선 색상
+    ctx.stroke(); // 윤곽선 그리기
 
-    // 4. 특정 영역 지우기 (clearRect)
-    // 이전에 그린 녹색 사각형의 일부를 지워봅니다.
-    ctx.clearRect(375, 75, 50, 25); // (시작x, 시작y, 지울 가로, 지울 세로)
-
+    // 3. 원 그리기
+    // 각도는 라디안 단위: 0 ~ 2 * Math.PI (360도)
+    ctx.beginPath();
+    ctx.arc(400, 200, 50, 0, 2 * Math.PI, false); // 중심(400,200), 반지름 50, 0도에서 360도까지 시계방향
+    ctx.fillStyle = 'rgba(0, 123, 255, 0.7)'; // 투명도 있는 파란색
+    ctx.fill();
+    ctx.strokeStyle = 'darkblue';
+    ctx.lineWidth = 2;
+    ctx.stroke();
 }
